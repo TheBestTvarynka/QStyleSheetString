@@ -9,6 +9,6 @@ int main()
 {
     cout << "Hello World!" << endl;
     QStyleSheetString test("QLabel");
-    test.SetPropereties("", "border-radius", "5px");
+    test.SetPropereties("", "background", "#ff26fa");
     return 0;
 }

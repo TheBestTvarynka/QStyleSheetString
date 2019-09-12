@@ -52,6 +52,13 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
     {
         CreatePropereties(start, propereties, value);
     }
+    // propereties exist
+    // color: red;
+    int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
+    int value_end = style_sheet.indexOf(";", value_loc);
+    qDebug() << style_sheet;
+    style_sheet.replace(value_loc, value_end - value_loc, value);
+    qDebug() << style_sheet;
 }
 
 QString QStyleSheetString::GetStyleSheet()

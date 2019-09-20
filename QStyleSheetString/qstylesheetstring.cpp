@@ -1,5 +1,4 @@
 #include "qstylesheetstring.h"
-
 #include <QDebug>
 
 void QStyleSheetString::CreateState(QString state, QString propereties, QString value)
@@ -8,9 +7,7 @@ void QStyleSheetString::CreateState(QString state, QString propereties, QString 
                                                      "") + propereties + ": " + value +
                                        QLatin1String("; }"
                                                      "");
-    qDebug() << style_sheet;
     style_sheet.append(new_state);
-    qDebug() << style_sheet;
 }
 
 void QStyleSheetString::CreatePropereties(int position, QString propereties, QString value)
@@ -18,9 +15,7 @@ void QStyleSheetString::CreatePropereties(int position, QString propereties, QSt
     QString new_propereties = propereties + ": " + value + ";" + QLatin1String(""
                                                                                "");
     int start = style_sheet.indexOf("{", position);
-    qDebug() << style_sheet;
     style_sheet.insert(start + 1, new_propereties);
-    qDebug() << style_sheet;
 }
 
 QStyleSheetString::QStyleSheetString(QString object)
@@ -44,21 +39,15 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
         CreateState(state, propereties, value);
         return;
     }
-    qDebug() << start;
     int range = style_sheet.indexOf("}", start);
     int prop_loc = style_sheet.indexOf(propereties, start);
-    qDebug() << prop_loc << range;
     if (prop_loc == -1 || prop_loc > range)
     {
         CreatePropereties(start, propereties, value);
     }
-    // propereties exist
-    // color: red;
     int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
     int value_end = style_sheet.indexOf(";", value_loc);
-    qDebug() << style_sheet;
     style_sheet.replace(value_loc, value_end - value_loc, value);
-    qDebug() << style_sheet;
 }
 
 QString QStyleSheetString::GetStyleSheet()

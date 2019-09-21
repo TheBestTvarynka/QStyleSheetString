@@ -8,10 +8,9 @@ class QStyleSheetString
 {
     QString style_sheet;
     QString name;
-
+public:
     void CreateState(QString state, QString propereties, QString value);
     void CreatePropereties(int position, QString propereties, QString value);
-public:
     QStyleSheetString(QString object);
     void SetStyleSheet(QString style);
     void SetPropereties(QString state, QString propereties, QString value);

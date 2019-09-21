@@ -23,7 +23,8 @@ QStyleSheetString::QStyleSheetString(QString object)
     name = object;
     style_sheet = name + QLatin1String(" {"
                                        "background: white;"
-                                       "color: black; }");
+                                       "color: black; }"
+                                       "");
 }
 
 void QStyleSheetString::SetStyleSheet(QString style)
@@ -44,6 +45,7 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
     if (prop_loc == -1 || prop_loc > range)
     {
         CreatePropereties(start, propereties, value);
+        return;
     }
     int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
     int value_end = style_sheet.indexOf(";", value_loc);

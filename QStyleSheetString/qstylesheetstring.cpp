@@ -74,3 +74,8 @@ QString QStyleSheetString::GetPropereties(QString state, QString propereties)
     int value_end = style_sheet.indexOf(";", value_loc);
     return style_sheet.mid(value_loc, value_end - value_loc);
 }
+
+bool QStyleSheetString::RemovePropereties(QString state, QString propereties)
+{
+
+}

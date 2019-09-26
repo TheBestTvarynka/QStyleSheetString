@@ -16,6 +16,7 @@ public:
     void SetPropereties(QString state, QString propereties, QString value);
     QString GetStyleSheet();
     QString GetPropereties(QString state, QString propereties);
+    bool RemovePropereties(QString state, QString propereties);
 };
 
 #endif // QSTYLESHEETSTRING_H

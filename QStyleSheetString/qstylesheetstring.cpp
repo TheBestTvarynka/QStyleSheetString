@@ -77,5 +77,18 @@ QString QStyleSheetString::GetPropereties(QString state, QString propereties)
 
 bool QStyleSheetString::RemovePropereties(QString state, QString propereties)
 {
-
+    int start = style_sheet.indexOf(name+state);
+    if (start == -1)
+    {
+        return false;
+    }
+    int range = style_sheet.indexOf("}", start);
+    int prop_loc = style_sheet.indexOf(propereties, start);
+    if (prop_loc == -1 || prop_loc > range)
+    {
+        return false;
+    }
+    int end_prop = style_sheet.indexOf(";", prop_loc);
+    style_sheet.remove(prop_loc, end_prop - prop_loc + 1);
+    return true;
 }

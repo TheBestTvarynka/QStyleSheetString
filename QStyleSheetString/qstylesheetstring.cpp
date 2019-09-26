@@ -27,6 +27,11 @@ QStyleSheetString::QStyleSheetString(QString object)
                                        "");
 }
 
+QStyleSheetString::QStyleSheetString(const QStyleSheetString &other)
+{
+    style_sheet = other.style_sheet;
+}
+
 void QStyleSheetString::SetStyleSheet(QString style)
 {
     style_sheet = style;

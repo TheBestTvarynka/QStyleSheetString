@@ -92,3 +92,15 @@ bool QStyleSheetString::RemovePropereties(QString state, QString propereties)
     style_sheet.remove(prop_loc, end_prop - prop_loc + 1);
     return true;
 }
+
+bool QStyleSheetString::RemoveState(QString state)
+{
+    int start = style_sheet.indexOf(name+state);
+    if (start == -1)
+    {
+        return false;
+    }
+    int end = style_sheet.indexOf("}", start);
+    style_sheet.remove(start, end - start + 1);
+    return true;
+}

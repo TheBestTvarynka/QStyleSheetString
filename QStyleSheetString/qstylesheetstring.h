@@ -6,19 +6,19 @@
 
 class QStyleSheetString
 {
-    QString style_sheet;
-    QString name;
+	QString style_sheet;
+	QString name;
 public:
-    QStyleSheetString(QString object);
-    QStyleSheetString(const QStyleSheetString &other);
-    void CreateState(QString state, QString propereties, QString value);
-    void CreatePropereties(int position, QString propereties, QString value);
-    void SetStyleSheet(QString style);
-    void SetPropereties(QString state, QString propereties, QString value);
-    QString GetStyleSheet();
-    QString GetPropereties(QString state, QString propereties);
-    bool RemovePropereties(QString state, QString propereties);
-    bool RemoveState(QString state);
+	QStyleSheetString(QString object);
+	QStyleSheetString(const QStyleSheetString &other);
+	void CreateState(QString state, QString propereties, QString value);
+	void CreatePropereties(int position, QString propereties, QString value);
+	void SetStyleSheet(QString style);
+	void SetPropereties(QString state, QString propereties, QString value);
+	QString GetStyleSheet();
+	QString GetPropereties(QString state, QString propereties);
+	bool RemovePropereties(QString state, QString propereties);
+	bool RemoveState(QString state);
 };
 
 #endif // QSTYLESHEETSTRING_H

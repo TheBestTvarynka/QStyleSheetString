@@ -31,6 +31,7 @@ Simle example how to use QStyleSheetString:
     ui->button1->setStyleSheet(style.GetStyleSheet());
 ```
 Result:
+![](https://github.com/TheBestTvarynka/QStyleSheetString/blob/master/img/example.gif)
 
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
@@ -55,4 +56,3 @@ Distributed under the GNU General Public License v3.0 license. See ``LICENSE`` f
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
-

@@ -31,6 +31,7 @@ Simle example how to use QStyleSheetString:
     ui->button1->setStyleSheet(style.GetStyleSheet());
 ```
 Result:
+
 ![](https://github.com/TheBestTvarynka/QStyleSheetString/blob/master/img/example.gif)
 
 _For more examples and usage, please refer to the [Wiki][wiki]._

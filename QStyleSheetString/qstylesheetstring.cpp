@@ -59,5 +59,18 @@ QString QStyleSheetString::GetStyleSheet()
 
 QString QStyleSheetString::GetPropereties(QString state, QString propereties)
 {
-
+    int start = style_sheet.indexOf(name+state);
+    if (start == -1)
+    {
+        return "";
+    }
+    int range = style_sheet.indexOf("}", start);
+    int prop_loc = style_sheet.indexOf(propereties, start);
+    if (prop_loc == -1 || prop_loc > range)
+    {
+        return "";
+    }
+    int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
+    int value_end = style_sheet.indexOf(";", value_loc);
+    return style_sheet.mid(value_loc, value_end - value_loc);
 }

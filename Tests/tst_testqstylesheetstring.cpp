@@ -15,6 +15,7 @@ public:
 private slots:
     void test_CreateState();
     void test_SetPropereties();
+    void test_GetPropereties();
 };
 
 TestQStyleSheetString::TestQStyleSheetString()
@@ -85,6 +86,28 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   "border-color: #00000;"
                                                   "color: #121212; }"
                                                   ""));
+    style.SetPropereties("::clicked", "mergin", "5px 6px");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
+                                                  "border-radius: 5px;"
+                                                  "background: white;"
+                                                  "color: #00f0f0; }"
+                                                  ".QLabel::hover {"
+                                                  "border-color: #00000;"
+                                                  "color: #121212; }"
+                                                  ".QLabel::clicked {"
+                                                  "mergin: 5px 6px; }"
+                                                  ""));
+}
+
+void TestQStyleSheetString::test_GetPropereties()
+{
+    QStyleSheetString style(".QLabel");
+    style.SetPropereties("", "color", "#00f0f0");
+    style.SetPropereties("::hover", "color", "#121212");
+    QCOMPARE(style.GetPropereties("", "color"), "#00f0f0");
+    QCOMPARE(style.GetPropereties("::hover", "color"), "#121212");
+    QCOMPARE(style.GetPropereties("::clicked", "color"), "");
+    QCOMPARE(style.GetPropereties("::hover", "background"), "");
 }
 
 QTEST_APPLESS_MAIN(TestQStyleSheetString)

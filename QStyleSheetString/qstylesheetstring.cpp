@@ -10,6 +10,12 @@ void QStyleSheetString::CreateState(QString state, QString propereties, QString 
 	style_sheet.append(new_state);
 }
 
+void QStyleSheetString::AddState(QString state)
+{
+	style_sheet.append(name + state + QLatin1String(""
+											 ""));
+}
+
 void QStyleSheetString::CreatePropereties(int position, QString propereties, QString value)
 {
 	QString new_propereties = propereties + ": " + value + ";" + QLatin1String(""

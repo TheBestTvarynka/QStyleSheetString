@@ -19,6 +19,7 @@ private slots:
     void test_RemovePropereties();
     void test_RemoveState();
     void test_AddState();
+    void test_RenameObject();
 };
 
 TestQStyleSheetString::TestQStyleSheetString()
@@ -163,6 +164,27 @@ void TestQStyleSheetString::test_AddState()
                                                   "background: white;"
                                                   "color: black; }"
                                                   ".QLabel::hover {"
+                                                  "border-color: #00000;"
+                                                  "color: #121212; }"
+                                                  ""));
+}
+
+void TestQStyleSheetString::test_RenameObject()
+{
+    QStyleSheetString style(".QLabel");
+    style.RenameObject(".QPushButton");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QPushButton {"
+                                                  "background: white;"
+                                                  "color: black; }"
+                                                  ""));
+    style.AddState(QLatin1String("::hover {"
+                   "border-color: #00000;"
+                   "color: #121212; }"));
+    style.RenameObject(".QWidget");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QWidget {"
+                                                  "background: white;"
+                                                  "color: black; }"
+                                                  ".QWidget::hover {"
                                                   "border-color: #00000;"
                                                   "color: #121212; }"
                                                   ""));

@@ -24,6 +24,18 @@ void QStyleSheetString::CreatePropereties(int position, QString propereties, QSt
 	style_sheet.insert(start + 1, new_propereties);
 }
 
+void QStyleSheetString::RenameObject(QString new_name)
+{
+	int size = name.size();
+	int pos = style_sheet.indexOf(name);
+	while (pos != -1)
+	{
+		style_sheet.replace(pos, size, new_name);
+		pos = style_sheet.indexOf(name);
+	}
+	name = new_name;
+}
+
 QStyleSheetString::QStyleSheetString(QString object)
 {
 	name = object;

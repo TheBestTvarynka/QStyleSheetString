@@ -12,7 +12,9 @@ public:
 	QStyleSheetString(QString object);
 	QStyleSheetString(const QStyleSheetString &other);
 	void CreateState(QString state, QString propereties, QString value);
+	void AddState(QString state);
 	void CreatePropereties(int position, QString propereties, QString value);
+	void RenameObject(QString new_name);
 	void SetStyleSheet(QString style);
 	void SetPropereties(QString state, QString propereties, QString value);
 	QString GetStyleSheet();

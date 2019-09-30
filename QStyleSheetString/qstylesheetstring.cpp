@@ -10,12 +10,30 @@ void QStyleSheetString::CreateState(QString state, QString propereties, QString 
 	style_sheet.append(new_state);
 }
 
+void QStyleSheetString::AddState(QString state)
+{
+	style_sheet.append(name + state + QLatin1String(""
+											 ""));
+}
+
 void QStyleSheetString::CreatePropereties(int position, QString propereties, QString value)
 {
 	QString new_propereties = propereties + ": " + value + ";" + QLatin1String(""
 																			   "");
 	int start = style_sheet.indexOf("{", position);
 	style_sheet.insert(start + 1, new_propereties);
+}
+
+void QStyleSheetString::RenameObject(QString new_name)
+{
+	int size = name.size();
+	int pos = style_sheet.indexOf(name);
+	while (pos != -1)
+	{
+		style_sheet.replace(pos, size, new_name);
+		pos = style_sheet.indexOf(name);
+	}
+	name = new_name;
 }
 
 QStyleSheetString::QStyleSheetString(QString object)

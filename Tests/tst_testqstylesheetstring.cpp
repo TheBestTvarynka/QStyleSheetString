@@ -101,6 +101,17 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   ".QLabel::clicked {"
                                                   "mergin: 5px 6px; }"
                                                   ""));
+    style.SetPropereties("::clicked:mergin", "10px 10px");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
+                                                  "border-radius: 5px;"
+                                                  "background: white;"
+                                                  "color: #00f0f0; }"
+                                                  ".QLabel::hover {"
+                                                  "border-color: #00000;"
+                                                  "color: #121212; }"
+                                                  ".QLabel::clicked {"
+                                                  "mergin: 10px 10px; }"
+                                                  ""));
 }
 
 void TestQStyleSheetString::test_GetPropereties()

@@ -75,6 +75,20 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
 	style_sheet.replace(value_loc, value_end - value_loc, value);
 }
 
+void QStyleSheetString::SetPropereties(QString propereties, QString value)
+{
+	if (propereties.indexOf(':') == -1)
+	{
+		return;
+	}
+        int p = propereties.indexOf(':', 2);
+	QString state = propereties.left(p);
+	qDebug() << state;
+        propereties = propereties.mid(p+1);
+	qDebug() << propereties;
+	SetPropereties(state, propereties, value);
+}
+
 QString QStyleSheetString::GetStyleSheet()
 {
 	return style_sheet;

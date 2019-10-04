@@ -17,6 +17,7 @@ public:
 	void RenameObject(QString new_name);
 	void SetStyleSheet(QString style);
 	void SetPropereties(QString state, QString propereties, QString value);
+	void SetPropereties(QString propereties, QString value);
 	QString GetStyleSheet();
 	QString GetPropereties(QString state, QString propereties);
 	bool RemovePropereties(QString state, QString propereties);

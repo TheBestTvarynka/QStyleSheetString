@@ -20,6 +20,7 @@ public:
 	void SetPropereties(QString propereties, QString value);
 	QString GetStyleSheet();
 	QString GetPropereties(QString state, QString propereties);
+	QString GetName();
 	bool RemovePropereties(QString state, QString propereties);
 	bool RemoveState(QString state);
 };

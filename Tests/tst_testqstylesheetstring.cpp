@@ -20,6 +20,7 @@ private slots:
     void test_RemoveState();
     void test_AddState();
     void test_RenameObject();
+    void test_CopyConstructor();
 };
 
 TestQStyleSheetString::TestQStyleSheetString()
@@ -199,6 +200,18 @@ void TestQStyleSheetString::test_RenameObject()
                                                   "border-color: #00000;"
                                                   "color: #121212; }"
                                                   ""));
+}
+
+void TestQStyleSheetString::test_CopyConstructor()
+{
+    QStyleSheetString style(".QLabel");
+    style.RenameObject(".QPushButton");
+    style.AddState(QLatin1String("::hover {"
+                   "border-color: #00000;"
+                   "color: #121212; }"));
+    QStyleSheetString fromOrigin(style);
+    QCOMPARE(style.GetStyleSheet(), fromOrigin.GetStyleSheet());
+    QCOMPARE(style.GetName(), fromOrigin.GetName());
 }
 
 QTEST_APPLESS_MAIN(TestQStyleSheetString)

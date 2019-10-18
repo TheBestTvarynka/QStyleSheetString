@@ -48,6 +48,7 @@ QStyleSheetString::QStyleSheetString(QString object)
 QStyleSheetString::QStyleSheetString(const QStyleSheetString &other)
 {
 	style_sheet = other.style_sheet;
+	name = other.name;
 }
 
 void QStyleSheetString::SetStyleSheet(QString style)
@@ -110,6 +111,11 @@ QString QStyleSheetString::GetPropereties(QString state, QString propereties)
 	int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
 	int value_end = style_sheet.indexOf(";", value_loc);
 	return style_sheet.mid(value_loc, value_end - value_loc);
+}
+
+QString QStyleSheetString::GetName()
+{
+	return name;
 }
 
 bool QStyleSheetString::RemovePropereties(QString state, QString propereties)

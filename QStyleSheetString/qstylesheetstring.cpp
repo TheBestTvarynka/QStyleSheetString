@@ -54,6 +54,9 @@ QStyleSheetString::QStyleSheetString(const QStyleSheetString &other)
 void QStyleSheetString::SetStyleSheet(QString style)
 {
 	style_sheet = style;
+    int p = style_sheet.indexOf(" ");
+    name = style_sheet.left(p);
+    qDebug() << name;
 }
 
 void QStyleSheetString::SetPropereties(QString state, QString propereties, QString value)

@@ -15,6 +15,7 @@ public:
 private slots:
     void test_CreateState();
     void test_SetPropereties();
+    void test_SetPropereties1();
     void test_GetPropereties();
     void test_RemovePropereties();
     void test_RemoveState();
@@ -113,6 +114,26 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   ".QLabel::clicked {"
                                                   "mergin: 10px 10px; }"
                                                   ""));
+}
+
+void TestQStyleSheetString::test_SetPropereties1()
+{
+    QStyleSheetString style("QLabel");
+    style.SetStyleSheet(QLatin1String("QLabel {"
+                                      "color: blacl;"
+                                      "background: #ff0000; }"
+                                      "QLabel::selected {"
+                                      "color: red; }"
+                                      "QLabel::selected:active {"
+                                      "color: blue; }"));
+    style.SetPropereties("::selected:active:color", "#00ff00");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String("QLabel {"
+                                                  "color: blacl;"
+                                                  "background: #ff0000; }"
+                                                  "QLabel::selected {"
+                                                  "color: red; }"
+                                                  "QLabel::selected:active {"
+                                                  "color: #00ff00; }"));
 }
 
 void TestQStyleSheetString::test_GetPropereties()

@@ -15,11 +15,14 @@ public:
 private slots:
     void test_CreateState();
     void test_SetPropereties();
+    void test_SetPropereties1();
+    void test_SetStyleSheet();
     void test_GetPropereties();
     void test_RemovePropereties();
     void test_RemoveState();
     void test_AddState();
     void test_RenameObject();
+    void test_CopyConstructor();
 };
 
 TestQStyleSheetString::TestQStyleSheetString()
@@ -114,6 +117,46 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   ""));
 }
 
+void TestQStyleSheetString::test_SetPropereties1()
+{
+    QStyleSheetString style("QLabel");
+    style.SetStyleSheet(QLatin1String("QLabel {"
+                                      "color: blacl;"
+                                      "background: #ff0000; }"
+                                      "QLabel::selected {"
+                                      "color: red; }"
+                                      "QLabel::selected:active {"
+                                      "color: blue; }"));
+    style.SetPropereties("::selected:active:color", "#00ff00");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String("QLabel {"
+                                                  "color: blacl;"
+                                                  "background: #ff0000; }"
+                                                  "QLabel::selected {"
+                                                  "color: red; }"
+                                                  "QLabel::selected:active {"
+                                                  "color: #00ff00; }"));
+}
+
+void TestQStyleSheetString::test_SetStyleSheet()
+{
+    QStyleSheetString style("QpushButton");
+    style.SetStyleSheet(QLatin1String("QLabel {"
+                                      "color: blacl;"
+                                      "background: #ff0000; }"
+                                      "QLabel::selected {"
+                                      "color: red; }"
+                                      "QLabel::selected:active {"
+                                      "color: #00ff00; }"));
+    QCOMPARE(style.GetStyleSheet(), QLatin1String("QLabel {"
+                                                  "color: blacl;"
+                                                  "background: #ff0000; }"
+                                                  "QLabel::selected {"
+                                                  "color: red; }"
+                                                  "QLabel::selected:active {"
+                                                  "color: #00ff00; }"));
+    QCOMPARE(style.GetName(), "QLabel");
+}
+
 void TestQStyleSheetString::test_GetPropereties()
 {
     QStyleSheetString style(".QLabel");
@@ -199,6 +242,18 @@ void TestQStyleSheetString::test_RenameObject()
                                                   "border-color: #00000;"
                                                   "color: #121212; }"
                                                   ""));
+}
+
+void TestQStyleSheetString::test_CopyConstructor()
+{
+    QStyleSheetString style(".QLabel");
+    style.RenameObject(".QPushButton");
+    style.AddState(QLatin1String("::hover {"
+                   "border-color: #00000;"
+                   "color: #121212; }"));
+    QStyleSheetString fromOrigin(style);
+    QCOMPARE(style.GetStyleSheet(), fromOrigin.GetStyleSheet());
+    QCOMPARE(style.GetName(), fromOrigin.GetName());
 }
 
 QTEST_APPLESS_MAIN(TestQStyleSheetString)

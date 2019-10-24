@@ -73,15 +73,21 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
     int start = style_sheet.indexOf(name+state);
     if (start == -1)
     {
-            CreateState(state, propereties, value);
-            return;
+        CreateState(state, propereties, value);
+        return;
     }
     int range = style_sheet.indexOf("}", start);
+    
     int prop_loc = style_sheet.indexOf(propereties, start);
+    while (prop_loc != -1 && (style_sheet[prop_loc - 1] != '\n' || style_sheet[prop_loc + propereties.size()] != ':'))
+    {
+        prop_loc = style_sheet.indexOf(propereties, prop_loc + 1);
+    }
+
     if (prop_loc == -1 || prop_loc > range)
     {
-            CreatePropereties(start, propereties, value);
-            return;
+        CreatePropereties(start, propereties, value);
+        return;
     }
     int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
     int value_end = style_sheet.indexOf(";", value_loc);
@@ -100,7 +106,7 @@ void QStyleSheetString::SetPropereties(QString propereties, QString value)
     }
     if (p == -1)
     {
-            return;
+        return;
     }
     QString state = propereties.left(p);
     qDebug() << state;
@@ -119,13 +125,13 @@ QString QStyleSheetString::GetPropereties(QString state, QString propereties)
     int start = style_sheet.indexOf(name+state);
     if (start == -1)
     {
-            return "";
+        return "";
     }
     int range = style_sheet.indexOf("}", start);
     int prop_loc = style_sheet.indexOf(propereties, start);
     if (prop_loc == -1 || prop_loc > range)
     {
-            return "";
+        return "";
     }
     int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
     int value_end = style_sheet.indexOf(";", value_loc);
@@ -142,13 +148,13 @@ bool QStyleSheetString::RemovePropereties(QString state, QString propereties)
     int start = style_sheet.indexOf(name+state);
     if (start == -1)
     {
-            return false;
+        return false;
     }
     int range = style_sheet.indexOf("}", start);
     int prop_loc = style_sheet.indexOf(propereties, start);
     if (prop_loc == -1 || prop_loc > range)
     {
-            return false;
+        return false;
     }
     int end_prop = style_sheet.indexOf(";", prop_loc);
     style_sheet.remove(prop_loc, end_prop - prop_loc + 1);
@@ -160,7 +166,7 @@ bool QStyleSheetString::RemoveState(QString state)
     int start = style_sheet.indexOf(name+state);
     if (start == -1)
     {
-            return false;
+        return false;
     }
     int end = style_sheet.indexOf("}", start);
     style_sheet.remove(start, end - start + 1);

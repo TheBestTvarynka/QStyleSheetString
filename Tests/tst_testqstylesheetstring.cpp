@@ -115,6 +115,17 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   ".QLabel::clicked {"
                                                   "mergin: 10px 10px; }"
                                                   ""));
+    QStyleSheetString newStyle(".QLabel");
+    newStyle.SetStyleSheet("QLabel {"
+                           "background: red;"
+                           "border-color: blue;"
+                           "color: dark; }");
+    newStyle.SetPropereties(":color", "white");
+    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
+                                                  "background: red;"
+                                                  "border-color: blue;"
+                                                  "color: #white; }"
+                                                  ""));
 }
 
 void TestQStyleSheetString::test_SetPropereties1()

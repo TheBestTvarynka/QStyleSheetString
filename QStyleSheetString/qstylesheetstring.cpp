@@ -4,16 +4,16 @@
 void QStyleSheetString::CreateState(QString state, QString propereties, QString value)
 {
     QString new_state = name + state + QLatin1String(" {"
-													 "") + propereties + ": " + value +
-									   QLatin1String("; }"
-													 "");
+                                                     "") + propereties + ": " + value +
+                                                     QLatin1String("; }"
+                                                     "");
     style_sheet.append(new_state);
 }
 
 void QStyleSheetString::AddState(QString state)
 {
     style_sheet.append(name + state + QLatin1String(""
-                                                 ""));
+                                                    ""));
 }
 
 void QStyleSheetString::CreatePropereties(int position, QString propereties, QString value)
@@ -77,13 +77,9 @@ void QStyleSheetString::SetPropereties(QString state, QString propereties, QStri
         return;
     }
     int range = style_sheet.indexOf("}", start);
-    
-    int prop_loc = style_sheet.indexOf(propereties, start);
-    while (prop_loc != -1 && (style_sheet[prop_loc - 1] != '\n' || style_sheet[prop_loc + propereties.size()] != ':'))
-    {
-        prop_loc = style_sheet.indexOf(propereties, prop_loc + 1);
-    }
 
+    QRegExp regular(QString("[{};\n]") + propereties + QString(":"));
+    int prop_loc = style_sheet.indexOf(regular, start);
     if (prop_loc == -1 || prop_loc > range)
     {
         CreatePropereties(start, propereties, value);
@@ -102,16 +98,13 @@ void QStyleSheetString::SetPropereties(QString propereties, QString value)
     {
     	p = f;
         f = propereties.indexOf(':', p + 1);
-        qDebug() << "f: " << f << p;
     }
     if (p == -1)
     {
         return;
     }
     QString state = propereties.left(p);
-    qDebug() << state;
     propereties = propereties.mid(p+1);
-    qDebug() << propereties;
     SetPropereties(state, propereties, value);
 }
 
@@ -125,13 +118,15 @@ QString QStyleSheetString::GetPropereties(QString state, QString propereties)
     int start = style_sheet.indexOf(name+state);
     if (start == -1)
     {
-        return "";
+            return "";
     }
     int range = style_sheet.indexOf("}", start);
-    int prop_loc = style_sheet.indexOf(propereties, start);
+
+    QRegExp regular(QString("[{};\n]") + propereties + QString(":"));
+    int prop_loc = style_sheet.indexOf(regular, start);
     if (prop_loc == -1 || prop_loc > range)
     {
-        return "";
+            return "";
     }
     int value_loc = style_sheet.indexOf(":", prop_loc) + 2;
     int value_end = style_sheet.indexOf(";", value_loc);

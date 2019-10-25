@@ -68,7 +68,6 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   "background: white;"
                                                   "color: #00f0f0; }"
                                                   ""));
-    style.CreateState("::hover", "color", "#ff00f0");
     style.SetPropereties("::hover", "color", "#121212");
     QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
                                                   "background: white;"
@@ -93,38 +92,23 @@ void TestQStyleSheetString::test_SetPropereties()
                                                   "border-color: #00000;"
                                                   "color: #121212; }"
                                                   ""));
-    style.SetPropereties("::clicked", "mergin", "5px 6px");
+    style.SetPropereties("::hover", "color", "blue");
     QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
                                                   "border-radius: 5px;"
                                                   "background: white;"
                                                   "color: #00f0f0; }"
                                                   ".QLabel::hover {"
                                                   "border-color: #00000;"
-                                                  "color: #121212; }"
-                                                  ".QLabel::clicked {"
-                                                  "mergin: 5px 6px; }"
+                                                  "color: blue; }"
                                                   ""));
-    style.SetPropereties("::clicked:mergin", "10px 10px");
+    style.SetPropereties("", "background", "red");
     QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
                                                   "border-radius: 5px;"
-                                                  "background: white;"
-                                                  "color: #00f0f0; }"
-                                                  ".QLabel::hover {"
-                                                  "border-color: #00000;"
-                                                  "color: #121212; }"
-                                                  ".QLabel::clicked {"
-                                                  "mergin: 10px 10px; }"
-                                                  ""));
-    QStyleSheetString newStyle(".QLabel");
-    newStyle.SetStyleSheet("QLabel {"
-                           "background: red;"
-                           "border-color: blue;"
-                           "color: dark; }");
-    newStyle.SetPropereties(":color", "white");
-    QCOMPARE(style.GetStyleSheet(), QLatin1String(".QLabel {"
                                                   "background: red;"
-                                                  "border-color: blue;"
-                                                  "color: #white; }"
+                                                  "color: #00f0f0; }"
+                                                  ".QLabel::hover {"
+                                                  "border-color: #00000;"
+                                                  "color: blue; }"
                                                   ""));
 }
 
